@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="page.title">
+        <action method="setPageTitle">
+            <argument name="title" xsi:type="string">Edit Category</argument>
+        </action>
+    </referenceBlock>
+
+    <body>
+        <referenceContainer name="content">
+            <block class="Myvendor\Faqs\Block\Adminhtml\CategoryEdit" template="Myvendor_Faqs::category_edit_form.phtml"/>
+        </referenceContainer>
+
+        <referenceBlock name="content">
+            <block class="Myvendor\Faqs\Block\Adminhtml\CategoryBackButton" name="back.button" template="Myvendor_Faqs::category_back_button.phtml" after="-"/>
+        </referenceBlock>
+    </body>
+</page>

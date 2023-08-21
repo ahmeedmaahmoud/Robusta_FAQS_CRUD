@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Form</title>
+    <style>
+        .admin__actions-toolbar {
+            text-align: center;
+        }
+
+        .empty-space {
+            height: 20px; /* Adjust the height as needed */
+        }
+    </style>
+</head>
+<body>
+    <?php /** @var Myvendor\Faqs\Block\Adminhtml\Add $block */ ?>
+    <?php $allCategoriesNames = $block->getAllCategories() ?>
+    <div class="admin__fieldset">
+        <legend class="admin__legend"><span><?='FAQ Information' ?></span></legend>
+        <form action="<?php echo $block->getFormAction() ?>" method="post" class="form-container">
+            <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+
+            <div class="admin__field">
+                <label class="admin__field-label"><?='Question' ?></label>
+                <div class="admin__field-control">
+                    <input type="text" name="question" class="admin__control-text" required>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label"><?='Answer'?></label>
+                <div class="admin__field-control">
+                    <textarea name="answer" class="admin__control-textarea" required></textarea>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label"><?='Status'?></label>
+                <div class="admin__field-control">
+                    <select name="status" class="admin__control-select">
+                        <option value="1"><?= 'Enabled'?></option>
+                        <option value="2"><?= 'Disabled'?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label"><?='Category'?></label>
+                <div class="admin__field-control">
+                    <select name="category_id" class="admin__control-select">
+                        <?php foreach ($allCategoriesNames as $categoryName): ?>
+                            <option value="<?php echo $categoryName->getID(); ?>">
+                                <?php echo $categoryName->getCategoryName(); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__actions-toolbar">
+                <div class="admin__actions">
+                    <button type="submit" class="action-primary"><?= __('Save') ?></button>
+                </div>
+                <div class="empty-space"></div> <!-- This creates the empty space -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+    "myvendor_faqs": {
+        "column": {
+            "FAQ_id": true,
+            "question": true,
+            "answer": true,
+            "category": true,
+            "status": true,
+            "category_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MYVENDOR_FAQS_CATEGORY_ID_MYVENDOR_CATEGORIES_ID": true
+        }
+    },
+    "myvendor_categories": {
+        "column": {
+            "id": true,
+            "category_name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,60 @@
+<?php /** @var Myvendor\Faqs\Block\Adminhtml\CategoryIndex $block */ ?>
+<?php $Collection = $block->getAllRecords();?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Management</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Category Management</h1>
+    <form action="<?php echo $block->getDeleteSelectedActionUrl(); ?>" method="post">
+    <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($Collection as $item): ?>
+                    <tr>
+                        <td><?php echo $item->getCategoryName(); ?></td>
+                        <td>
+                            <a class="action-primary" href="<?php echo $block->getEditActionUrl($item->getId()); ?>">Edit</a>
+                            <input type="checkbox" class="faq-checkbox" name="selected_records[]" value="<?php echo $item->getId(); ?>">
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <button class="action-primary" name="delete_selected">Delete Selected</button>
+    </form>
+</body>
+</html>

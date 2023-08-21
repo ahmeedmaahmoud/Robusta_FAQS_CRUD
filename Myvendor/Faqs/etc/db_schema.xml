@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="myvendor_faqs" resource="default" engine="innodb" comment="test FAQS Table">
+        <column xsi:type="int" name="FAQ_id" unsigned="false" nullable="false" identity="true" comment="FAQ Id"/>
+        <column xsi:type="varchar" name="question" nullable="false" length="100" comment="Question"/>
+        <column xsi:type="varchar" name="answer" nullable="false" length="100" comment="Answer"/>
+        <column xsi:type="int" name="category_id" nullable="false" unsigned="false" comment="Category ID"/>
+        <column xsi:type="smallint" name="status" unsigned="true" padding="5" default="1" nullable="false" identity="false" comment="Enabled(1)/Disabled(2)"/>
+
+        <constraint xsi:type="foreign" referenceId="MYVENDOR_FAQS_CATEGORY_ID_MYVENDOR_CATEGORIES_ID" column="category_id" referenceTable="myvendor_categories"
+        referenceColumn="id" onDelete="CASCADE"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="FAQ_id"/>
+        </constraint>
+    </table>
+
+    <table name="myvendor_categories"  resource="default" engine="innodb" comment="test Categories Table">
+        <column xsi:type="int" name="id" unsigned="false" nullable="false" identity="true" comment="Category ID"/>
+        <column xsi:type="varchar" name="category_name" nullable="false" length="100" comment="Category"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>
+

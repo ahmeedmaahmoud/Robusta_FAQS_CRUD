@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ Form</title>
+    <style>
+         .admin__actions-toolbar {
+            text-align: center;
+        }
+
+        .empty-space {
+            height: 20px; /* Adjust the height as needed */
+        }
+
+    </style>
+</head>
+<body>
+    <?php /** @var Myvendor\Faqs\Block\Adminhtml\Edit $block */ ?>
+    <?php $allCategoriesNames = $block->getAllCategories() ?>
+    <div class="admin__fieldset">
+        <legend class="admin__legend"><span><?php echo __('FAQ Information') ?></span></legend>
+        <form action="<?php echo $block->getFormAction() ?>" method="post" class="form-container">
+            <input name="form_key" type="hidden" value="<?php echo $block->getFormKey() ?>" />
+
+            <div class="admin__field">
+                <label class="admin__field-label"><?php echo __('Question') ?></label>
+                <div class="admin__field-control">
+                    <input type="text" name="question" class="admin__control-text" value="<?php echo $block->getRecordQuestion() ?>" required>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label"><?php echo __('Answer') ?></label>
+                <div class="admin__field-control">
+                    <textarea name="answer" class="admin__control-textarea" required><?php echo $block->getRecordAnswer() ?></textarea>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label"><?php echo __('Status') ?></label>
+                <div class="admin__field-control">
+                    <select name="status" class="admin__control-select">
+                        <option value="1"<?php if ($block->getRecordStatus() == 1) echo ' selected="selected"' ?>><?php echo __('Enabled') ?></option>
+                        <option value="2"<?php if ($block->getRecordStatus() == 2) echo ' selected="selected"' ?>><?php echo __('Disabled') ?></option>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label"><?php echo __('Category') ?></label>
+                <div class="admin__field-control">
+                    <select name="category" class="admin__control-select">
+                        <?php foreach ($allCategoriesNames as $categoryName): ?>
+                            <option value="<?php echo $categoryName->getID() ?>"<?php if ($block->getRecordCategory() == $categoryName->getCategoryName()) echo ' selected="selected"' ?>><?php echo $categoryName->getCategoryName() ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="admin__actions-toolbar">
+                <div class="admin__actions">
+                    <button type="submit" class="action-primary"><?= __('Save') ?></button>
+                </div>
+                <div class="empty-space"></div> <!-- This creates the empty space -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>
